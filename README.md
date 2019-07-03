@@ -11,16 +11,12 @@ Ours hosts file contains just one target device named  raspberry1:
 
 We must install ansible on the controller machine:
 
-<code>
     $ sudo apt-get install ansible   
-
+    
     $ sudo apt-get install sshpass
-</code>
 
 
 First run a simple ping to the target machine:
 
-<code>
     $ ansible raspberry1 -m ping -i hosts
-</code>
 

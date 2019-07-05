@@ -30,7 +30,7 @@ With ansible playbooks we can configure a set of instructions that we want our r
 - Install a package
 - Shutdown / Restart
 
-    # Simple ansible playbook.yml
+    ### Simple ansible playbook.yml
     -
         name: Play 1
         hosts: localhost
@@ -117,7 +117,7 @@ How to run a playbook:
     - Win_path
     - Win_ping
 
-    # Ansible module example
+    ### Ansible module example
     -
         name: Setup web server on all nodes
         hosts: web_nodes

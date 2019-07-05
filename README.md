@@ -66,3 +66,83 @@ How to run a playbook:
 
     $ ansible-playbook playbook-webserver.yaml
 
+
+### Ansible Modules
+
+- System
+    - User
+    - Group
+    - Hostname
+    - Iptables
+    - Make
+    - Mount
+    - Systemd
+
+- Commands
+    - Command
+    - Expect
+    - Raw
+    - Script
+    - Shell
+
+- Files
+    - Acl
+    - Archive
+    - Copy
+    - File
+    - Find
+    - Replace
+    - Stat
+    - Template
+
+- Database
+    - Mongodb
+    - MySQL
+    - PostgreSQL
+
+- Cloud
+    - Amazon
+    - Atomic
+    - Azure
+    - Docker
+    - VMWare
+    - RackSpace
+    - Google
+
+- Windows
+    - Win_copy
+    - Win_command
+    - Win_file
+    - Win_msi
+    - Win_path
+    - Win_ping
+
+    # Ansible module example
+    -
+        name: Setup web server on all nodes
+        hosts: web_nodes
+        tasks:
+            -
+            name: Update entry into /etc/resolv.conf
+            lineinfile:
+                path: /etc/resolv.conf
+                line: 'nameserver 10.1.250.10'
+
+            -
+            name: Create a new user
+            user:
+                name: web_user
+                uid: 1040
+                group: developers
+
+            -
+            name: Execute a script
+            script: /tmp/install_script.sh
+
+            -
+            name: Start httpd service
+            service:
+                name: httpd
+                state: present
+
+

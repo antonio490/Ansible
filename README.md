@@ -1,6 +1,11 @@
 
 # ANSIBLE
 
+Ansible control machine can only be Linux and not Windows
+ - Windows machines can be targets of Ansible and thus be part of the automation (Ansble connects using winrm)
+
+ 
+
 Ours hosts file contains just one target device named  raspberry1:
 
     # hosts file
@@ -146,3 +151,31 @@ How to run a playbook:
                 state: present
 
 
+### Loops
+
+    -
+        name: Install required packages
+        hosts: localhost
+        vars:
+            packages:
+            - httpd
+            - binutils
+            - glibc
+            - ksh
+            - libaio
+            - libXext
+            - gcc
+            - make
+            - sysstat
+            - unixODBC
+            - mongodb
+            - nodejs
+            - grunt
+
+        tasks:
+            -
+            yum: name="{{ item }}" 
+                state=present
+            
+            with_items: '{{ packages }}'
+     

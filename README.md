@@ -2,9 +2,9 @@
 # ANSIBLE
 
 Ansible control machine can only be Linux and not Windows
- - Windows machines can be targets of Ansible and thus be part of the automation (Ansble connects using winrm)
+ - Windows machines can be targets of Ansible and thus be part of the automation (Ansible connects using winrm)
 
- 
+
 
 Ours hosts file contains just one target device named  raspberry1:
 

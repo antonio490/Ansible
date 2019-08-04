@@ -197,3 +197,20 @@ After this we could see that it has been created a role with an structure with t
             - tests
             - vars
   
+  ## Asynchronous actions
+
+  - Run a process and check on it later
+  - Run multiple processes at once and check on them later
+  - Run processes and forget about them.
+
+    tasks:
+        - command: /opt/monitor_web_app.py
+          async: 360       # how long to run?
+          poll: 60         # How frequently to check? default 10 seconds 
+          register: webapp_result
+
+        - name: Check status of tasks
+          async_status: jid={{ webapp_result.ansible_job_id }}
+          register: job_result
+          until: job_result.finished
+          retries. 30

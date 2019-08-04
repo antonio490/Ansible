@@ -179,3 +179,21 @@ How to run a playbook:
             
             with_items: '{{ packages }}'
      
+## Roles
+
+The easy way to create a role is by typing the command 
+
+    $ ansible-galaxy init mysql-db 
+
+After this we could see that it has been created a role with an structure with the next folders:
+
+    - roles
+        - mysql-db
+            - defaults
+            - handlers
+            - meta
+            - tasks
+              - main.yml
+            - tests
+            - vars
+  

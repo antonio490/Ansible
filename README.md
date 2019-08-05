@@ -214,3 +214,16 @@ After this we could see that it has been created a role with an structure with t
           register: job_result
           until: job_result.finished
           retries. 30
+
+## Vault
+
+Encript our inventory.txt file so nobody can see ouu credentials:
+
+    ansible-vault encrypt inventory.txt
+
+    ansible-playbook playbook.yml -i inventory.txt -ask-vault-pass
+
+    ansible-playbook playbook.yml -i inventory.txt -vault-password-file ~./vault_pass.txt
+
+    ansible-vault view inventory.txt
+

@@ -227,3 +227,6 @@ Encript our inventory.txt file so nobody can see ouu credentials:
 
     ansible-vault view inventory.txt
 
+
+# Ansible for Network Engineers: GNS3 & Ansible
+

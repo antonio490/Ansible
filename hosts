@@ -1,8 +1,13 @@
+##################################################################
+######################### ANSIBLE HOSTS ##########################
+##################################################################
 
+# This file hosts has to be move into the path /etc/ansible/hosts
 
 raspberry1 ansible_host=192.168.1.57 ansible_connection=ssh ansible_port=22 ansible_user=pi ansible_ssh_pass=genista2
 raspberry2 ansible_host=192.168.1.58 ansible_connection=ssh ansible_port=22 ansible_user=pi ansible_ssh_pass=genista2
 raspberry3 ansible_host=192.168.1.59 ansible_connection=ssh ansible_port=22 ansible_user=pi ansible_ssh_pass=genista2
+raspberry4 ansible_host=192.168.1.44 ansible_connection=ssh ansible_port=22 ansible_user=pi ansible_ssh_pass=genista2
 
 
 [devices]
@@ -10,4 +15,5 @@ raspberry1
 raspberry2
 raspberry3
 
-localhost ansible_connection=localhost nameserver_ip=10.1.250.10 snmp_port=160-161
+[node]
+raspberry4

@@ -17,6 +17,19 @@
       apache2_module: stated=started name=wsgi
       notify: restart apache2
 
+    - name: copy demo app
+      copy: src=/demo/app dest=/var/www/demo mode=0755
+      notify: restart apache2
+
+    - name: copy virtual apache config
+      copy: src=/demo/apache.cfg desd=/etc/apache2/sites-available mode=0755
+      notify: restart apache2
+
+    - name : setup python virtual environment
+      pip: requirements=/var/demo/www/requirements.txt virtualenv=/var/www/demo/.venv
+      notify: restart apache2
+
+
   handlers:
     - name: restart apache2
       service: name=apache2 state=restarted

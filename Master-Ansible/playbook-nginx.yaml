@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install nginx service
+      apt: name=nginx state=present update_cache=yes

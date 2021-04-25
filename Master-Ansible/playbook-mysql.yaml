@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install mysql-server service
+      app: name=mysql-server state=present update_cache=yes

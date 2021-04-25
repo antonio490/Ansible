@@ -2,5 +2,8 @@
 - hosts: all
   become: true
   tasks:
-    - name: Install nginx service
+    - name: install nginx
       apt: name=nginx state=present update_cache=yes
+
+    - name: ensure nginx started
+      service: name=nginx stated=started enabled=yes

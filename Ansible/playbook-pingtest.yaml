@@ -1,9 +1,0 @@
-# bootstrap.yml is an Ansible playbook that contains instructions about 
-# which roles are run on which hosts, and with which variables.
-
--
-  name: Test connectivity to all target devices
-  hosts: all
-  tasks:
-    - name: Ping test
-      ping:    

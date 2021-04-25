@@ -12,3 +12,11 @@
 
     - name: ensure apache started
       service: name=apache stated=started enabled=yes
+
+    - name: ensure mod_wsgi enabled
+      apache2_module: stated=started name=wsgi
+      notify: restart apache2
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted

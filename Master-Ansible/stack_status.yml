@@ -10,6 +10,7 @@
 
 - hosts: webserver
   become: true
+  gather_facts: false
   tasks:
     - name: verify apache service
       command: service apache2 status
@@ -28,6 +29,7 @@
 
 - hosts: control
   become: true
+  gather_facts: false
   tasks:
     - name: verify end-to-end index response
       uri: url=http://{{item}} return_content=yes
@@ -42,3 +44,29 @@
       uri: url=http://{{item}}/db return_contetnt=yes
       with_items: groups.loadbalancer
       register: lb_db
+
+    - fail: msg="db failed to return content"
+      when: "'Database conected from' not in item.content"
+      with_items: "{{lb_db.results}}"
+
+- hosts: loadbalancer
+  become: true
+  gather_facts: false
+  tasks:
+    - name: verify backend index response
+      uri: url=http://{{item}} return_content=yes
+      with_items: groups.webserver
+      register: app_index
+
+    - fail: msg="index failed to return content"
+      when: "'Hello, from sunny {{item.item}}!' not in item.content"
+      with_items: "{{app_index.results}}"
+
+    - name: verify end-to-end db response
+      uri: url=http://{{item}}/db return_contetnt=yes
+      with_items: groups.webserver
+      register: app_db
+
+    - fail: msg="db failed to return content"
+      when: "'Database conected from {{item.item}}!' not in item.content"
+      with_items: "{{app_db.results}}"

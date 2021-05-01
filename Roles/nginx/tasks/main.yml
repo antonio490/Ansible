@@ -5,29 +5,38 @@ tasks:
     apt: name={{item}} state=present
     with_item:
       - python-httplib2
+    tags: [ 'packages' ]
+
 
   - name: install nginx
     apt: name=nginx state=present
+    tags: [ 'packages' ]
+
 
   - name: configure nginx site
     template: src=templates/nginx.conf.j2 dest=/etc/nginx/sites-available/{{ item.key }} mode=0644
     with_dict: sites
     notify: restart nginx
+    tags: [ 'configure' ]
 
   - name: get active sites
     shell: ls -l /etc/nginx/sites-enabled
     register: active
+    tags: [ 'configure' ]
 
   - name: de-activate sites
     file: path=/etc/nginx/sites-enabled/{{ item }} state=absent
     with_items: active.stdout_lines
     when: item not in sites
     notify: restart nginx
+    tags: [ 'configure' ]
 
   - name: activate nginx site
     file: src=/etc/nginx/sites-available/{{ item.key }} dest=/etc/nginx/sites-enabled/demo state=link
     with_dict: sites
     notify: restart nginx
+    tags: [ 'configure' ]
 
   - name: ensure nginx started
     apt: name=nginx state=started enabled=yes
+    tags: [ 'packages' ]

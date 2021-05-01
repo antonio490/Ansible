@@ -6,33 +6,18 @@ tasks:
     with_item:
       - apache2 
       - libapache2-mod-wsgi
-      - python-pip
-      - python-virtualenv
-      - python-mysqldb
-
-  - name: ensure apache started
-    service: name=apache stated=started enabled=yes
+    tags: [ 'packages' ]
 
   - name: ensure mod_wsgi enabled
     apache2_module: stated=started name=wsgi
     notify: restart apache2
+    tags: [ 'system' ]
 
-  - name: copy demo app
-    copy: src=/demo/app dest=/var/www/demo mode=0755
-    notify: restart apache2
-
-  - name: copy virtual apache config
-    copy: src=/demo/apache.cfg desd=/etc/apache2/sites-available mode=0755
-    notify: restart apache2
-
-  - name : setup python virtual environment
-    pip: requirements=/var/demo/www/requirements.txt virtualenv=/var/www/demo/.venv
-    notify: restart apache2
-  
   - name: de-activate default apache site
     file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
     notify: restart apache2
+    tags: [ 'system' ]
 
-  - name: activate demo apache site
-    file: src=/etc/apache2/sites-available/demo.conf dest=/etc/apache2/sites-enabled/demo.conf state=link
-    notify: restart apache2
+  - name: ensure apache started
+    service: name=apache stated=started enabled=yes
+    tags: [ 'service' ]

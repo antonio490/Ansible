@@ -2,12 +2,12 @@
 # tasks file for nginx
 tasks:
   - name: install tools
-    apt: name={{item}} state=present update_cache=yes
+    apt: name={{item}} state=present
     with_item:
       - python-httplib2
 
   - name: install nginx
-    apt: name=nginx state=present update_cache=yes
+    apt: name=nginx state=present
 
   - name: configure nginx site
     template: src=templates/nginx.conf.j2 dest=/etc/nginx/sites-available/{{ item.key }} mode=0644

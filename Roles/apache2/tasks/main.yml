@@ -2,7 +2,7 @@
 # tasks file for apache2
 tasks:
   - name: install web applications
-    apt: name={{item}} state=present update_cache = yes
+    apt: name={{item}} state=present
     with_item:
       - apache2 
       - libapache2-mod-wsgi

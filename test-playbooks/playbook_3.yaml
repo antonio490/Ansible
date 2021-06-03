@@ -1,0 +1,19 @@
+
+# ANSIBLE PLAYBOOK
+-
+  hosts: all
+  become: true
+  tasks:
+    - name: check connection is established
+    ping
+
+    - name: ensure dsTest is started
+    service: 
+      name: dsTest 
+      stated: started 
+      enabled: yes
+
+    - name: ensure dsFilter module is loaded
+    community.general.modprobe:
+      name: dsFilter
+      state: present

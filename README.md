@@ -228,5 +228,41 @@ Encript our inventory.txt file so nobody can see ouu credentials:
     ansible-vault view inventory.txt
 
 
-# Ansible for Network Engineers: GNS3 & Ansible
+## Ad-hocs examples
 
+An Ansible ad hoc command uses the /usr/bin/ansible command-line tool to automate a single task on one or more managed nodes. ad hoc commands are quick and easy, but they are not reusable. So why learn about ad hoc commands? ad hoc commands demonstrate the simplicity and power of Ansible.
+
+### Files
+
+
+    $ ansible localhost -m ansible.builtin.copy -a "src=/etc/hosts dest=/tmp/hosts"
+
+    $ ansible localhost -m ansible.builtin.file -a "dest=/tmp/hosts state=absent"
+
+    $ ansible localhost -m ansible.builtin.file -a "dest=/tmp/directorios mode=755 owner=antonio group=antonio state=directory"
+    localhost | CHANGED => {
+        "changed": true,
+        "gid": 1000,
+        "group": "antonio",
+        "mode": "0755",
+        "owner": "antonio",
+        "path": "/tmp/directorios",
+        "size": 4096,
+        "state": "directory",
+        "uid": 1000
+    }
+
+
+### Services
+
+    $ ansible localhost -m ansible.builtin.service -a "name=ssh state=started"
+
+    $ ansible localhost -m ansible.builtin.service -a "name=nginx state=restarted"
+
+### Packages
+
+    $ ansible localhost -m ansible.builtin.apt -a "name=acme state=latest"
+
+    $ ansible localhost -m ansible.builtin.apt -a "name=acme state=absent"
+
+    $ ansible localhost -m ansible.builtin.apt -a "name=acme state=present"

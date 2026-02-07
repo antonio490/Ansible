@@ -228,6 +228,25 @@ Encript our inventory.txt file so nobody can see ouu credentials:
     ansible-vault view inventory.txt
 
 
+## Configuration
+
+    /etc/ansible/ansible.cfg
+
+    $ export ANSIBLE_CFG=/home/antonio/ansible.cfg
+
+    ansible --version
+    ansible [core 2.19.5]
+    config file = /etc/ansible/ansible.cfg
+    configured module search path = ['/home/antonio/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+    ansible python module location = /usr/lib/python3/dist-packages/ansible
+    ansible collection location = /home/antonio/.ansible/collections:/usr/share/ansible/collections
+    executable location = /home/antonio/.local/bin/ansible
+    python version = 3.12.3 (main, Jan  8 2026, 11:30:50) [GCC 13.3.0] (/usr/bin/python3)
+    jinja version = 3.1.2
+    pyyaml version = 6.0.1 (with libyaml v0.2.5)
+
+
+
 ## Ad-hocs examples
 
 An Ansible ad hoc command uses the /usr/bin/ansible command-line tool to automate a single task on one or more managed nodes. ad hoc commands are quick and easy, but they are not reusable. So why learn about ad hoc commands? ad hoc commands demonstrate the simplicity and power of Ansible.
@@ -266,3 +285,9 @@ An Ansible ad hoc command uses the /usr/bin/ansible command-line tool to automat
     $ ansible localhost -m ansible.builtin.apt -a "name=acme state=absent"
 
     $ ansible localhost -m ansible.builtin.apt -a "name=acme state=present"
+
+### User id and password
+
+    $ ansible all -m ansible.builtin.ping -k -u user123
+
+    $ ansible all -m ansible.builtin.command -a "java -version" -k -u user123
